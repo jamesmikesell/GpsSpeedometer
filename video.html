@@ -32,7 +32,9 @@
   <br/>
   <span id="startLon">lon</span>
   <br/>
-  <span id="speed">speed</span>
+  <span id="speed">speed mps</span>
+  <br/>
+  <span id="timestamp">time</span>
 
   <br/>
   <button id="btnLoc">Location</button>
@@ -99,12 +101,20 @@
       //   }
       // };
 
-      var watchId = navigator.geolocation.watchPosition(function (startPos) {
+
+      var success = function (startPos) {
         document.getElementById('startLat').innerHTML = startPos.coords.latitude;
         document.getElementById('startLon').innerHTML = startPos.coords.longitude;
         document.getElementById('speed').innerHTML = startPos.coords.speed;
+        document.getElementById('timestamp').innerHTML = new Date(startPos.timestamp).toISOString();
 
-      });
+      };
+
+      var options = {
+        enableHighAccuracy: true
+      };
+
+      var watchId = navigator.geolocation.watchPosition(success, null, options);
 
 
       // navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
