@@ -23,7 +23,7 @@
   <br/>
   <br/>
   <br/>
-  <span id="speed">speed mph 3 sound</span>
+  <span id="speed">speed mph 3 avg</span>
   <br/>
   <span id="accuracy">Accuracy</span>
 
@@ -57,22 +57,18 @@
 
     var button = document.getElementById("btnLoc");
     var prevPosition;
+    var avgSpeed = [];
+    var avgSize = 3;
 
     button.onclick = function () {
 
-      var context = new (window.AudioContext || window.webkitAudioContext)();
-      var osc = context.createOscillator(); // instantiate an oscillator
-      osc.type = 'sine'; // this is the default - also square, sawtooth, triangle
-      osc.frequency.value = 600; // Hz
-      osc.connect(context.destination); // connect it to the destination
-      osc.start(); // start the oscillator
-      osc.stop(context.currentTime + 2); // stop 2 seconds after the current time
-
-
-
-
-
-
+      // var context = new (window.AudioContext || window.webkitAudioContext)();
+      // var osc = context.createOscillator(); // instantiate an oscillator
+      // osc.type = 'sine'; // this is the default - also square, sawtooth, triangle
+      // osc.frequency.value = 600; // Hz
+      // osc.connect(context.destination); // connect it to the destination
+      // osc.start(); // start the oscillator
+      // osc.stop(context.currentTime + 2); // stop 2 seconds after the current time
 
 
 
@@ -87,7 +83,22 @@
             var time = currentPosition.timestamp - prevPosition.timestamp;
             var mps = distance / time * 1000;
             var mph = mps * 2.23694;
-            document.getElementById('speed').innerHTML = mph.toFixed(1);
+
+            if (avgSpeed.length < avgSize) {
+              for (i = 0; i < avgSize; i++) {
+                avgSpeed[i] = mph;
+              }
+            }
+
+            avgSpeed.shift();
+            avgSpeed.push(mph);
+
+            var calculatedAvg = 0;
+            for (i = 0; i < avgSpeed.length; i++) {
+              calculatedAvg = calculatedAvg + (avgSpeed[i] / avgSpeed.length);
+            }
+
+            document.getElementById('speed').innerHTML = calculatedAvg.toFixed(1);
           }
         }
 
