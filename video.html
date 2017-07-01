@@ -32,7 +32,7 @@
   <br/>
   <span id="startLon">lon</span>
   <br/>
-  <span id="speed">speed mph</span>
+  <span id="speed">speed mph 2</span>
   <br/>
   <span id="timestamp">time</span>
 
@@ -79,7 +79,7 @@
             prevPosition.coords.latitude, prevPosition.coords.longitude);
 
             var time = currentPosition.timestamp -prevPosition.timestamp;
-            var mps =distance / time;
+            var mps =distance / time * 1000;
             var mph = mps * 2.23694;
           document.getElementById('speed').innerHTML = mph;
 
