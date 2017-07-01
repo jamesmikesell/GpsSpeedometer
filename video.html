@@ -24,6 +24,8 @@
   <br/>
   <br/>
   <span id="speed">speed mph 3</span>
+  <br/>
+  <span id="accuracy">Accuracy</span>
 
   <br/>
   <button id="btnLoc">Location</button>
@@ -62,15 +64,18 @@
 
       var success = function (currentPosition) {
         if (prevPosition != null) {
-          var distance = getDistanceFromLatLonInMeters(currentPosition.coords.latitude, currentPosition.coords.longitude,
-            prevPosition.coords.latitude, prevPosition.coords.longitude);
+          if (currentPosition.coords.accuracy < 10 && prevPosition.coords.accuracy < 10) {
+            var distance = getDistanceFromLatLonInMeters(currentPosition.coords.latitude, currentPosition.coords.longitude,
+              prevPosition.coords.latitude, prevPosition.coords.longitude);
 
-          var time = currentPosition.timestamp - prevPosition.timestamp;
-          var mps = distance / time * 1000;
-          var mph = mps * 2.23694;
-          document.getElementById('speed').innerHTML = mph.toFixed(1);
+            var time = currentPosition.timestamp - prevPosition.timestamp;
+            var mps = distance / time * 1000;
+            var mph = mps * 2.23694;
+            document.getElementById('speed').innerHTML = mph.toFixed(1);
+          }
         }
 
+        document.getElementById('accuracy').innerHTML = currentPosition.coords.accuracy;
         prevPosition = currentPosition;
       };
 
