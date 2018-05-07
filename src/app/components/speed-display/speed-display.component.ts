@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { SpeedCalculator } from '../../classes/speed-calculator';
 
 @Component({
@@ -16,6 +16,7 @@ export class SpeedDisplayComponent implements OnInit {
         this.speed.init();
     }
 
+    @HostListener('window:resize', ['$event'])
     get fontHeight(): string {
         let maxWidth = window.innerWidth * .5;
         let maxHeight = window.innerHeight * .846;
