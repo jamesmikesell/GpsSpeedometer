@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { SpeedDisplayComponent } from './components/speed-display/speed-display.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+    {
+        path: '',
+        component: SpeedDisplayComponent
+    }
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }
