@@ -1,4 +1,5 @@
 {
     "editor.detectIndentation": false,
-    "editor.formatOnType": true
+    "editor.formatOnType": true,
+    "git.autofetch": true
 }
