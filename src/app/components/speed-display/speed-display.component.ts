@@ -15,7 +15,7 @@ export class SpeedDisplayComponent implements OnInit {
     enabled = false;
     mirror = false;
     rotate = false;
-    
+
     private colorInverted = false;
 
     constructor(private renderer: Renderer2) { }
@@ -31,7 +31,7 @@ export class SpeedDisplayComponent implements OnInit {
         this.enabled = true;
     }
 
-    stop(): void{
+    stop(): void {
         this.noSleep.disable();
         this.toggleFullScreen();
         this.enabled = false;
@@ -60,6 +60,18 @@ export class SpeedDisplayComponent implements OnInit {
         else {
             cancelFullScreen.call(doc);
         }
+    }
+
+    getMirrorRotateStyle(): string {
+        if (this.mirror && this.rotate)
+            return "mirror-rotate";
+
+        if (this.mirror)
+            return "mirror";
+        if (this.rotate)
+            return "rotate";
+
+        return "";
     }
 
     @HostListener('window:resize', ['$event'])

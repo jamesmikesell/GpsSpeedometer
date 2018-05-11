@@ -7,10 +7,7 @@
   <input type="number" [(ngModel)]="speed.avgSampleSize">
 </div>
 
-<div [ngClass]="{
-    'mirror': mirror,
-    'rotate': rotate
-}" (click)="stop()">
+<div [ngClass]="getMirrorRotateStyle()" (click)="stop()">
   <span [ngStyle]="{'font-size': fontHeight}" *ngIf="enabled">
     {{speed.averageSpeedMph?.toFixed(1)}}
   </span>
