@@ -9,21 +9,23 @@ import { SpeedCalculator } from '../../classes/speed-calculator';
 export class SpeedDisplayComponent implements OnInit {
 
     speed = new SpeedCalculator();
+    fontHeight: string;
 
     constructor() { }
 
     ngOnInit(): void {
         this.speed.init();
+        this.setFontHeight();
     }
 
     @HostListener('window:resize', ['$event'])
-    get fontHeight(): string {
+    private setFontHeight(): void {
         let maxWidth = window.innerWidth * .5;
         let maxHeight = window.innerHeight * .846;
 
         let size = Math.min(maxHeight, maxWidth);
 
-        return `${size}px`;
+        this.fontHeight = `${size}px`;
     }
 
 }
