@@ -1,3 +1,5 @@
-<span [ngStyle]="{'font-size': fontHeight}">
+<button (click)="start()" *ngIf="!enabled" class="button">Start</button>
+
+<span [ngStyle]="{'font-size': fontHeight}" *ngIf="enabled">
   {{speed.averageSpeedMph?.toFixed(1)}}
 </span>
