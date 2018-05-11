@@ -27,13 +27,13 @@ export class SpeedDisplayComponent implements OnInit {
 
     start(): void {
         this.noSleep.enable();
-        this.toggleFullScreen();
+        this.changeFullScreenMode(true);
         this.enabled = true;
     }
 
     stop(): void {
         this.noSleep.disable();
-        this.toggleFullScreen();
+        this.changeFullScreenMode(false);
         this.enabled = false;
     }
 
@@ -47,17 +47,17 @@ export class SpeedDisplayComponent implements OnInit {
         this.colorInverted = !this.colorInverted;
     }
 
-    toggleFullScreen(): void {
+    private changeFullScreenMode(goFullScreen: boolean): void {
         let doc = window.document;
         let docEl = doc.documentElement;
 
-        let requestFullScreen = docEl.requestFullscreen || docEl.webkitRequestFullScreen;
-        let cancelFullScreen = doc.exitFullscreen || doc.webkitExitFullscreen;
+        // let isFullScreen: boolean = !!doc.fullscreenElement || !!doc.webkitFullscreenElement;
 
-        if (!doc.fullscreenElement && !doc.webkitFullscreenElement) {
+        if (goFullScreen) {
+            let requestFullScreen = docEl.requestFullscreen || docEl.webkitRequestFullScreen;
             requestFullScreen.call(docEl);
-        }
-        else {
+        } else {
+            let cancelFullScreen = doc.exitFullscreen || doc.webkitExitFullscreen;
             cancelFullScreen.call(doc);
         }
     }
