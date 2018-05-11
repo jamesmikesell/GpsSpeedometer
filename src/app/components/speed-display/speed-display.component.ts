@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Renderer2 } from '@angular/core';
 import { SpeedCalculator } from '../../classes/speed-calculator';
 import * as NoSleep from 'nosleep.js';
 
@@ -13,8 +13,11 @@ export class SpeedDisplayComponent implements OnInit {
     fontHeight: string;
     noSleep = new NoSleep();
     enabled = false;
+    mirror = false;
+    
+    private colorInverted = false;
 
-    constructor() { }
+    constructor(private renderer: Renderer2) { }
 
     ngOnInit(): void {
         this.speed.init();
@@ -25,6 +28,22 @@ export class SpeedDisplayComponent implements OnInit {
         this.noSleep.enable();
         this.toggleFullScreen();
         this.enabled = true;
+    }
+
+    stop(): void{
+        this.noSleep.disable();
+        this.toggleFullScreen();
+        this.enabled = false;
+    }
+
+    toggleInvertColors(): void {
+        if (this.colorInverted) {
+            this.renderer.removeClass(document.body, 'invert');
+        } else {
+            this.renderer.addClass(document.body, 'invert');
+        }
+
+        this.colorInverted = !this.colorInverted;
     }
 
     toggleFullScreen(): void {

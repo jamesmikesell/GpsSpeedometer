@@ -1,5 +1,11 @@
-<button (click)="start()" *ngIf="!enabled" class="button">Start</button>
+<div *ngIf="!enabled">
+  <button (click)="start()" class="button">Start</button>
+  <button (click)="toggleInvertColors()" class="button">Invert Colors</button>
+  <button (click)="mirror = !mirror" class="button">Mirror</button>
+</div>
 
-<span [ngStyle]="{'font-size': fontHeight}" *ngIf="enabled">
-  {{speed.averageSpeedMph?.toFixed(1)}}
-</span>
+<div [ngClass]="{'mirror': mirror}" (click)="stop()">
+  <span [ngStyle]="{'font-size': fontHeight}" *ngIf="enabled">
+    {{speed.averageSpeedMph?.toFixed(1)}}
+  </span>
+</div>
