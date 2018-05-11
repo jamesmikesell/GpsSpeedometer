@@ -9,11 +9,12 @@ import * as NoSleep from 'nosleep.js';
 })
 export class SpeedDisplayComponent implements OnInit {
 
-    speed = new SpeedCalculator();
+    speed = new SpeedCalculator(5);
     fontHeight: string;
     noSleep = new NoSleep();
     enabled = false;
     mirror = false;
+    rotate = false;
     
     private colorInverted = false;
 

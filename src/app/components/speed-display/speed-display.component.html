@@ -1,12 +1,16 @@
 <div *ngIf="!enabled">
   <button (click)="start()" class="button">Start</button>
   <button (click)="toggleInvertColors()" class="button">Invert Colors</button>
-  <button (click)="mirror = !mirror" class="button">Mirror</button>
+  <button (click)="mirror = !mirror" class="button">{{mirror ? 'Un-' : ''}}Mirror</button>
+  <button (click)="rotate = !rotate" class="button">{{rotate ? 'Un-' : ''}}Rotate</button>
   Sample Averaging
   <input type="number" [(ngModel)]="speed.avgSampleSize">
 </div>
 
-<div [ngClass]="{'mirror': mirror}" (click)="stop()">
+<div [ngClass]="{
+    'mirror': mirror,
+    'rotate': rotate
+}" (click)="stop()">
   <span [ngStyle]="{'font-size': fontHeight}" *ngIf="enabled">
     {{speed.averageSpeedMph?.toFixed(1)}}
   </span>
