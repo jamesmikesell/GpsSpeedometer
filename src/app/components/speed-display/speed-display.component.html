@@ -2,6 +2,8 @@
   <button (click)="start()" class="button">Start</button>
   <button (click)="toggleInvertColors()" class="button">Invert Colors</button>
   <button (click)="mirror = !mirror" class="button">Mirror</button>
+  Sample Averaging
+  <input type="number" [(ngModel)]="speed.avgSampleSize">
 </div>
 
 <div [ngClass]="{'mirror': mirror}" (click)="stop()">
