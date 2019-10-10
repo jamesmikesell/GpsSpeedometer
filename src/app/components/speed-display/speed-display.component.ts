@@ -16,7 +16,7 @@ export class SpeedDisplayComponent implements OnInit {
     mirror = false;
     rotate = false;
 
-    private colorInverted = false;
+    private colorInverted = true;
 
     constructor(private renderer: Renderer2) { }
 
@@ -54,10 +54,10 @@ export class SpeedDisplayComponent implements OnInit {
         // let isFullScreen: boolean = !!doc.fullscreenElement || !!doc.webkitFullscreenElement;
 
         if (goFullScreen) {
-            let requestFullScreen = docEl.requestFullscreen || docEl.webkitRequestFullScreen;
+            let requestFullScreen = docEl.requestFullscreen || (docEl as any).webkitRequestFullScreen;
             requestFullScreen.call(docEl);
         } else {
-            let cancelFullScreen = doc.exitFullscreen || doc.webkitExitFullscreen;
+            let cancelFullScreen = doc.exitFullscreen || (doc as any).webkitExitFullscreen;
             cancelFullScreen.call(doc);
         }
     }
