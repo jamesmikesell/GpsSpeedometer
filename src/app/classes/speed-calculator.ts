@@ -30,6 +30,7 @@ export class SpeedCalculator {
         if (this.prevPosition.timestamp === currentPosition.timestamp)
             return;
 
+        // Calculating speed using distance as some browsers refuse to give gps speed.
         let distance = DistanceCalculator.getDistanceFromLatLonInMeters(currentPosition.coords, this.prevPosition.coords);
 
         let time = currentPosition.timestamp - this.prevPosition.timestamp;
